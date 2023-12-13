@@ -6,54 +6,68 @@ namespace Projects {
     {
         public static void Main(string[] args)
         {
+            const string nameAsk = "Introdueix el nom del client: ";
+            const string ageAsk = "Introdueix l'edat del client: ";
+            const string discountAsk = "Introdueix el descompte de l'entrada: ";
+            const string nullDiscount = "No s'ha indicat cap descompte";
+            const string negativeDiscount = "El descompte no pot ser negatiu";
+            
             int age;
-            int num;
+            int discount;
+
             string name;
-            Console.WriteLine("Introdueix el nom del client: ");
+
+
+            Console.WriteLine(nameAsk);
             name = Console.ReadLine();
-            Console.WriteLine("Introdueix l'edat del client: ");
+
+            Console.WriteLine(ageAsk);
             age = Convert.ToInt32(Console.ReadLine());
             
-            Console.WriteLine("Introdueix el descompte de l'entrada: ");
+            Console.WriteLine(discountAsk);
+            discount = Convert.ToInt32(Console.ReadLine());
+
             if (discount == 0)
             {
-                Console.WriteLine("No s'ha indicat cap descompte");
+                Console.WriteLine(nullDiscount);
             }
             else if (discount < 0) {
-                Console.WriteLine("El descompte no pot ser negatiu");
+                Console.WriteLine(negativeDiscount);
             }
-            PrintCompte(age, name);
+            printCompte(age, name);
         }
 
-        static void PrintCompte(int age, string name)
+        public static void printCompte(int age, string name)
         {
-            PrintHeader();
-            Console.WriteLine("nom: " + age);
-            Console.WriteLine("edat: " + name);
-            if (EntradaGratis(age) == 1)
+            const string freeTicket = "El client té entrada gratis.";
+            const string notFreeTicket = "El client no té entrada gratis.";
+
+            printHeader();
+            Console.WriteLine($"nom: {name}");
+            Console.WriteLine($"edat: {age}");
+
+            if (freeEntry(age) == true)
             {
-                Console.WriteLine("El client té entrada gratis.");
+                Console.WriteLine(freeTicket);
             }
             else 
             {
-                Console.WriteLine("El client no té entrada gratis.");
+                Console.WriteLine(notFreeTicket);
             }    
         }
-        static void PrintHeader()
+        public static void printHeader()
         {
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*********** Control clients ***************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
+            const string controlClients = "*******************************************\n" +
+                "*******************************************\n" +
+                "*********** Control clients ***************\n" +
+                "*******************************************\n" +
+                "*******************************************";
+            Console.WriteLine(controlClients);
         }
-        static int EntradaGratis(int edat)
+        public static bool freeEntry(int edat)
         {
-            return (Jubilat(edat)) ? 1 : 0;
-        }
-        static bool Jubilat(int edat)
-        {
-            return edat >= 65;
+            if (edat>=65) return true;
+            return false;
         }
     }
 }
