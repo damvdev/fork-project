@@ -1,20 +1,20 @@
 ﻿using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Projects {
     public class MyProject
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            int age;
-            int num;
+            const string MsgInName = "Introdueix el nom del client: ";
+            int age,discount;
             string name;
-            Console.WriteLine("Introdueix el nom del client: ");
+            Console.WriteLine(MsgInName);
             name = Console.ReadLine();
             Console.WriteLine("Introdueix l'edat del client: ");
             age = Convert.ToInt32(Console.ReadLine());
             
             Console.WriteLine("Introdueix el descompte de l'entrada: ");
+            discount = Convert.ToInt32(Console.ReadLine());
             if (discount == 0)
             {
                 Console.WriteLine("No s'ha indicat cap descompte");
@@ -30,14 +30,7 @@ namespace Projects {
             PrintHeader();
             Console.WriteLine("nom: " + age);
             Console.WriteLine("edat: " + name);
-            if (EntradaGratis(age) == 1)
-            {
-                Console.WriteLine("El client té entrada gratis.");
-            }
-            else 
-            {
-                Console.WriteLine("El client no té entrada gratis.");
-            }    
+            Console.WriteLine(Jubilat(age) ? "El client té entrada gratis." : "El client no té entrada gratis.");
         }
         static void PrintHeader()
         {
@@ -46,10 +39,6 @@ namespace Projects {
             Console.WriteLine("*********** Control clients ***************");
             Console.WriteLine("*******************************************");
             Console.WriteLine("*******************************************");
-        }
-        static int EntradaGratis(int edat)
-        {
-            return (Jubilat(edat)) ? 1 : 0;
         }
         static bool Jubilat(int edat)
         {
