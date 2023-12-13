@@ -2,7 +2,7 @@
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Projects {
-    public class MyProject
+    public static class MyProject
     {
         public static void Main(string[] args)
         {
@@ -36,7 +36,7 @@ namespace Projects {
             PrintCompte(age, name);
         }
 
-        static void PrintCompte(int age, string name)
+        public static void PrintCompte(int age, string name)
         {
             const string MsgName = "nom: {0}";
             const string MsgAge = "edat: {0}";
@@ -50,7 +50,7 @@ namespace Projects {
 
             Console.WriteLine(EntradaGratis(age) == one ? MSGTicketFree : MSGTicketNoFree);   
         }
-        static void PrintHeader()
+        public static void PrintHeader()
         {
             const string MsgAsterisks = "*******************************************";
             const string MsgHeader = "*********** Control clients ***************";
@@ -61,11 +61,11 @@ namespace Projects {
             Console.WriteLine(MsgAsterisks);
             Console.WriteLine(MsgAsterisks);
         }
-        static int EntradaGratis(int edat)
+        public static int EntradaGratis(int edat)
         {
             return (Jubilat(edat)) ? 1 : 0;
         }
-        static bool Jubilat(int edat)
+        public static bool Jubilat(int edat)
         {
             return edat >= 65;
         }
