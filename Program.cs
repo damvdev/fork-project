@@ -1,57 +1,68 @@
 ﻿using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Projects {
+namespace Projects 
+{
     public class MyProject
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            int age;
-            int num;
+            int age, discount;
             string name;
-            Console.WriteLine("Introdueix el nom del client: ");
-            name = Console.ReadLine();
-            Console.WriteLine("Introdueix l'edat del client: ");
+
+            Console.Write("Introdueix el nom del client: ");
+            name = Console.ReadLine()??"";
+
+            Console.Write("Introdueix l'edat del client: ");
             age = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Introdueix el descompte de l'entrada: ");
-            if (discount == 0)
+
+            do
             {
-                Console.WriteLine("No s'ha indicat cap descompte");
-            }
-            else if (discount < 0) {
-                Console.WriteLine("El descompte no pot ser negatiu");
-            }
+                Console.Write("Introdueix el descompte de l'entrada: ");
+                discount = Convert.ToInt32(Console.ReadLine());
+
+                if (discount == 0)
+                {
+                    Console.WriteLine("No s'ha indicat cap descompte");
+                }
+                else if (discount < 0)
+                {
+                    Console.WriteLine("El descompte no pot ser negatiu");
+                }
+
+            } while (discount < 0);
+            
             PrintCompte(age, name);
         }
 
-        static void PrintCompte(int age, string name)
+        public static void PrintCompte(int age, string name)
         {
             PrintHeader();
+
             Console.WriteLine("nom: " + age);
             Console.WriteLine("edat: " + name);
-            if (EntradaGratis(age) == 1)
+
+            if (EsJubilat(age))
             {
                 Console.WriteLine("El client té entrada gratis.");
             }
             else 
             {
                 Console.WriteLine("El client no té entrada gratis.");
-            }    
+            }
         }
-        static void PrintHeader()
+
+        public static void PrintHeader()
         {
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
+            const string MsgAsteriscs = ("*******************************************");
+
+            Console.WriteLine(MsgAsteriscs);
+            Console.WriteLine(MsgAsteriscs);
             Console.WriteLine("*********** Control clients ***************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
+            Console.WriteLine(MsgAsteriscs);
+            Console.WriteLine(MsgAsteriscs);
         }
-        static int EntradaGratis(int edat)
-        {
-            return (Jubilat(edat)) ? 1 : 0;
-        }
-        static bool Jubilat(int edat)
+
+        public static bool EsJubilat(int edat)
         {
             return edat >= 65;
         }
