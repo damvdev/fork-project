@@ -26,7 +26,7 @@ namespace Projects {
             PrintCompte(age, name);
         }
 
-        static void PrintCompte(int age, string name)
+        public static void PrintCompte(int age, string name)
         {
             const string header = @"
                                 *******************************************
@@ -41,11 +41,11 @@ namespace Projects {
             else Console.WriteLine("El client no té entrada gratis.");  
         }
 
-        static int EntradaGratis(int edat)
+        public static int EntradaGratis(int edat)
         {
             return (Jubilat(edat)) ? 1 : 0;
         }
-        static bool Jubilat(int edat)
+        public static bool Jubilat(int edat)
         {
             return edat >= 65;
         }
