@@ -6,52 +6,46 @@ namespace Projects {
     {
         public static void Main(string[] args)
         {
-            int age;
-            int num;
+            int age, num, discount;
             string name;
-            Console.WriteLine("Introdueix el nom del client: ");
-            name = Console.ReadLine();
-            Console.WriteLine("Introdueix l'edat del client: ");
-            age = Convert.ToInt32(Console.ReadLine());
             
-            Console.WriteLine("Introdueix el descompte de l'entrada: ");
+            const string IntroName = "Introdueix el nom del client: ", IntroSurname = "Introdueix l'edat del client: ", Desc = "Introdueix el descompte de l'entrada: ", ErrorVoid = "No s'ha indicat cap descompte", ErrorNegative = "El descompte no pot ser negatiu";
+            Console.WriteLine(IntroName);
+            name = Console.ReadLine();
+            Console.WriteLine(IntroSurname);
+            age = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(Desc);
+            discount = Convert.ToInt32(Console.ReadLine());
             if (discount == 0)
             {
-                Console.WriteLine("No s'ha indicat cap descompte");
+                Console.WriteLine(ErrorVoid);
             }
             else if (discount < 0) {
-                Console.WriteLine("El descompte no pot ser negatiu");
+                Console.WriteLine(ErrorNegative);
             }
             PrintCompte(age, name);
         }
 
-        static void PrintCompte(int age, string name)
+        public static void PrintCompte(int age, string name)
         {
-            PrintHeader();
+            const string header = @"
+                                *******************************************
+                                *******************************************
+                                *********** Control clients ***************
+                                *******************************************
+                                *******************************************";
+            Console.WriteLine(header);
             Console.WriteLine("nom: " + age);
             Console.WriteLine("edat: " + name);
-            if (EntradaGratis(age) == 1)
-            {
-                Console.WriteLine("El client té entrada gratis.");
-            }
-            else 
-            {
-                Console.WriteLine("El client no té entrada gratis.");
-            }    
+            if (EntradaGratis(age) == 1) Console.WriteLine("El client té entrada gratis.");
+            else Console.WriteLine("El client no té entrada gratis.");  
         }
-        static void PrintHeader()
-        {
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*********** Control clients ***************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
-        }
-        static int EntradaGratis(int edat)
+
+        public static int EntradaGratis(int edat)
         {
             return (Jubilat(edat)) ? 1 : 0;
         }
-        static bool Jubilat(int edat)
+        public static bool Jubilat(int edat)
         {
             return edat >= 65;
         }
