@@ -7,8 +7,7 @@ namespace Projects
         public static void Main(string[] args)
         {
             const string AskClientName = "Introdueix el nom del client: ", AskClientAge = "Introdueix l'edat del client: ";
-            const string AskDiscount = "Introdueix el descompte de l'entrada: ",DefaultNumValue = "0";
-            const string DiscountIsZero = "No s'ha indicat cap descompte",DiscountIsNegative = "El descompte no pot ser negatiu";
+            const string DefaultNumValue = "0";
 
             int age, discount;
             string name;
@@ -17,40 +16,29 @@ namespace Projects
             name = Console.ReadLine()??"";
             Console.WriteLine(AskClientAge);
             age = Convert.ToInt32(Console.ReadLine()??DefaultNumValue);
-            Console.WriteLine(AskDiscount);
-            discount = Convert.ToInt32(Console.ReadLine()??DefaultNumValue);
-
-            if (discount == 0)
-            {
-                Console.WriteLine(DiscountIsZero);
-            }
-            else if (discount < 0)
-            {
-                Console.WriteLine(DiscountIsNegative);
-            }
             PrintCompte(age, name);
         }
 
-        static void PrintCompte(int age, string name)
+        public static void PrintCompte(int age, string name)
         {
             PrintHeader();
-            Console.WriteLine("nom: " + age);
-            Console.WriteLine("edat: " + name);
+            Console.WriteLine("nom: " + name);
+            Console.WriteLine("edat: " + age);
             Console.WriteLine(EntradaGratis(age) ? "El client té entrada gratis." : "El client no té entrada gratis.");
         }
-        static void PrintHeader()
+        public static void PrintHeader()
         {
             Console.WriteLine("*******************************************\n*******************************************\n" +
                               "*********** Control clients ***************\n*******************************************\n" +
                               "*******************************************");
         }
-        static bool EntradaGratis(int edat)
+        public static bool EntradaGratis(int age)
         {
-            return Jubilat(edat);
+            return Jubilat(age);
         }
-        static bool Jubilat(int edat)
+        public static bool Jubilat(int age)
         {
-            return edat >= 65;
+            return age >= 65;
         }
     }
 }
