@@ -6,23 +6,27 @@ namespace Projects
     {
         public static void Main(string[] args)
         {
-            int age, num, discount;
+            const string AskClientName = "Introdueix el nom del client: ", AskClientAge = "Introdueix l'edat del client: ";
+            const string AskDiscount = "Introdueix el descompte de l'entrada: ",DefaultNumValue = "0";
+            const string DiscountIsZero = "No s'ha indicat cap descompte",DiscountIsNegative = "El descompte no pot ser negatiu";
+
+            int age, discount;
             string name;
 
-            Console.WriteLine("Introdueix el nom del client: ");
-            name = Console.ReadLine();
-            Console.WriteLine("Introdueix l'edat del client: ");
-            age = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Introdueix el descompte de l'entrada: ");
-            discount = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(AskClientName);
+            name = Console.ReadLine()??"";
+            Console.WriteLine(AskClientAge);
+            age = Convert.ToInt32(Console.ReadLine()??DefaultNumValue);
+            Console.WriteLine(AskDiscount);
+            discount = Convert.ToInt32(Console.ReadLine()??DefaultNumValue);
 
             if (discount == 0)
             {
-                Console.WriteLine("No s'ha indicat cap descompte");
+                Console.WriteLine(DiscountIsZero);
             }
             else if (discount < 0)
             {
-                Console.WriteLine("El descompte no pot ser negatiu");
+                Console.WriteLine(DiscountIsNegative);
             }
             PrintCompte(age, name);
         }
