@@ -1,25 +1,27 @@
 ﻿using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Projects {
+namespace Projects
+{
     public class MyProject
     {
         public static void Main(string[] args)
         {
-            int age;
-            int num;
+            int age, num, discount;
             string name;
+
             Console.WriteLine("Introdueix el nom del client: ");
             name = Console.ReadLine();
             Console.WriteLine("Introdueix l'edat del client: ");
             age = Convert.ToInt32(Console.ReadLine());
-            
             Console.WriteLine("Introdueix el descompte de l'entrada: ");
+            discount = Convert.ToInt32(Console.ReadLine());
+
             if (discount == 0)
             {
                 Console.WriteLine("No s'ha indicat cap descompte");
             }
-            else if (discount < 0) {
+            else if (discount < 0)
+            {
                 Console.WriteLine("El descompte no pot ser negatiu");
             }
             PrintCompte(age, name);
@@ -30,26 +32,17 @@ namespace Projects {
             PrintHeader();
             Console.WriteLine("nom: " + age);
             Console.WriteLine("edat: " + name);
-            if (EntradaGratis(age) == 1)
-            {
-                Console.WriteLine("El client té entrada gratis.");
-            }
-            else 
-            {
-                Console.WriteLine("El client no té entrada gratis.");
-            }    
+            Console.WriteLine(EntradaGratis(age) ? "El client té entrada gratis." : "El client no té entrada gratis.");
         }
         static void PrintHeader()
         {
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*********** Control clients ***************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
+            Console.WriteLine("*******************************************\n*******************************************\n" +
+                              "*********** Control clients ***************\n*******************************************\n" +
+                              "*******************************************");
         }
-        static int EntradaGratis(int edat)
+        static bool EntradaGratis(int edat)
         {
-            return (Jubilat(edat)) ? 1 : 0;
+            return Jubilat(edat);
         }
         static bool Jubilat(int edat)
         {
