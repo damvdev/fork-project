@@ -1,59 +1,78 @@
 ﻿using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Projects {
     public class MyProject
     {
         public static void Main(string[] args)
         {
-            int age;
-            int num;
-            string name;
-            Console.WriteLine("Introdueix el nom del client: ");
-            name = Console.ReadLine();
-            Console.WriteLine("Introdueix l'edat del client: ");
+            const string NameInput = "Introdueix el nom del client:";
+            const string AgeInput = "Introdueix l'edat del client:";
+            const string DiscountInput = "Introdueix el descompte de l'entrada:";
+            const string NoDiscount = "No hi ha descompte";
+            const string WrongDiscount = "El descompte no pot ser negatiu o superior al 100%";
+            const string AgaingInput = "Torna a introduir el descompte amb valors permesos";
+
+            int age, discount = 0;
+            bool done = false;
+
+            Console.WriteLine(NameInput);
+            string name = Console.ReadLine();
+            Console.WriteLine(AgeInput);
             age = Convert.ToInt32(Console.ReadLine());
             
-            Console.WriteLine("Introdueix el descompte de l'entrada: ");
-            if (discount == 0)
+            Console.WriteLine(DiscountInput);
+            discount = Convert.ToInt32(Console.ReadLine());
+            do
             {
-                Console.WriteLine("No s'ha indicat cap descompte");
-            }
-            else if (discount < 0) {
-                Console.WriteLine("El descompte no pot ser negatiu");
-            }
-            PrintCompte(age, name);
+                if (discount == 0)
+                {
+                    Console.WriteLine(NoDiscount);
+                    done = true;
+                }
+                else if (discount < 0 || discount > 100)
+                {
+                    Console.WriteLine(WrongDiscount);
+                    Console.WriteLine(AgaingInput);
+                    discount = Convert.ToInt32(Console.ReadLine());
+                }
+                else
+                {
+                    done = true;
+                }
+            } while(!done);
+            PrintCompte(age, name, discount);
+            Console.ReadKey();
         }
 
-        static void PrintCompte(int age, string name)
+        public static void PrintHeader()
         {
+            Console.WriteLine("\n" +
+                              "*******************************************\n" +
+                              "*******************************************\n" +
+                              $"************* Control clients *************\n" +
+                              "*******************************************\n" +
+                              "*******************************************");
+        }
+        public static bool Jubilat(int edat)
+        {
+            return edat >= 65;
+        }
+        public static void PrintCompte(int age, string name, int discount)
+        {
+            const string FreeEnter = "El client té entrada gratis.";
+            const string NoFreeEnter = "El client no té entrada gratis.";
+
             PrintHeader();
-            Console.WriteLine("nom: " + age);
-            Console.WriteLine("edat: " + name);
-            if (EntradaGratis(age) == 1)
+            Console.WriteLine("nom: " + name);
+            Console.WriteLine("edat: " + age);
+            if (Jubilat(age) || discount == 100)
             {
-                Console.WriteLine("El client té entrada gratis.");
+                Console.WriteLine(FreeEnter);
             }
             else 
             {
-                Console.WriteLine("El client no té entrada gratis.");
+                Console.WriteLine(NoFreeEnter);
             }    
-        }
-        static void PrintHeader()
-        {
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*********** Control clients ***************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
-        }
-        static int EntradaGratis(int edat)
-        {
-            return (Jubilat(edat)) ? 1 : 0;
-        }
-        static bool Jubilat(int edat)
-        {
-            return edat >= 65;
         }
     }
 }
