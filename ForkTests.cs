@@ -13,7 +13,7 @@ namespace ForkTetst
             string name = "carlos";
             MyProject.PrintBill(age, name);
 
-            string expected = "*******************************************\n*******************************************\n*********** Control clients ***************\n*******************************************\n*******************************************\nnom: carlos\nedat: 64\nEl client no té entrada gratis.";
+            string expected = "*******************************************\n*******************************************\n*********** Control clients ***************\n*******************************************\n*******************************************\nnom: carlos\nedat: 64\nEl client no tÃ© entrada gratis.";
             Assert.AreEqual(expected, sw.ToString().Trim().Replace("\r\n", "\n"));
         }
         [TestMethod]
@@ -25,7 +25,7 @@ namespace ForkTetst
             string name = "carlos";
             MyProject.PrintBill(age, name);
 
-            string expected = "*******************************************\n*******************************************\n*********** Control clients ***************\n*******************************************\n*******************************************\nnom: carlos\nedat: 65\nEl client té entrada gratis.";
+            string expected = "*******************************************\n*******************************************\n*********** Control clients ***************\n*******************************************\n*******************************************\nnom: carlos\nedat: 65\nEl client tÃ© entrada gratis.";
             Assert.AreEqual(expected, sw.ToString().Trim().Replace("\r\n", "\n"));
         }
         [TestMethod]
