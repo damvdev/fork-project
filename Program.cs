@@ -1,45 +1,31 @@
 ﻿using System;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Projects {
+namespace Projects
+{
     public class MyProject
     {
         public static void Main(string[] args)
         {
             int age;
-            int num;
             string name;
-            Console.WriteLine("Introdueix el nom del client: ");
+            const string MsgInputName = "Introdueix el nom del client: ";
+            const string MsgInputAge = "Introdueix l'edat del client: ";
+
+            PrintHeader();
+            Console.WriteLine();
+
+            Console.Write(MsgInputName);
             name = Console.ReadLine();
-            Console.WriteLine("Introdueix l'edat del client: ");
+            Console.WriteLine();
+
+            Console.Write(MsgInputAge);
             age = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Introdueix el descompte de l'entrada: ");
-            if (discount == 0)
-            {
-                Console.WriteLine("No s'ha indicat cap descompte");
-            }
-            else if (discount < 0) {
-                Console.WriteLine("El descompte no pot ser negatiu");
-            }
+            Console.WriteLine();
+
             PrintCompte(age, name);
         }
-
-        static void PrintCompte(int age, string name)
-        {
-            PrintHeader();
-            Console.WriteLine("nom: " + age);
-            Console.WriteLine("edat: " + name);
-            if (EntradaGratis(age) == 1)
-            {
-                Console.WriteLine("El client té entrada gratis.");
-            }
-            else 
-            {
-                Console.WriteLine("El client no té entrada gratis.");
-            }    
-        }
-        static void PrintHeader()
+        public static void PrintHeader()
         {
             Console.WriteLine("*******************************************");
             Console.WriteLine("*******************************************");
@@ -47,13 +33,22 @@ namespace Projects {
             Console.WriteLine("*******************************************");
             Console.WriteLine("*******************************************");
         }
-        static int EntradaGratis(int edat)
+        public static void PrintCompte(int age, string name)
         {
-            return (Jubilat(edat)) ? 1 : 0;
+            Console.WriteLine("nom: " + age);
+            Console.WriteLine("edat: " + name);
+            if (EntradaGratis(age))
+            {
+                Console.WriteLine("El client té entrada gratis.");
+            }
+            else
+            {
+                Console.WriteLine("El client no té entrada gratis.");
+            }
         }
-        static bool Jubilat(int edat)
+        public static bool EntradaGratis(int edat)
         {
-            return edat >= 65;
+            return edat >= 65 ? true : false;
         }
     }
 }
