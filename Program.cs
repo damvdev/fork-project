@@ -1,59 +1,70 @@
 ﻿using System;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Projects {
+namespace Projects
+{
     public class MyProject
     {
         public static void Main(string[] args)
         {
-            int age;
-            int num;
+            const string GetNameMsg = "Introdueix el nom del client:",
+              GetAgeMsg = "Introdueix l'edat del client: ",
+              GetDiscountMsg = "Introdueix el descompte de l'entrada: ",
+              DiscountFalseMsg = "No s'ha indicat cap descompte",
+              DiscountErrorMsg = "El descompte no pot ser negatiu";
+
+            const int Zero=0;
+
             string name;
-            Console.WriteLine("Introdueix el nom del client: ");
-            name = Console.ReadLine();
-            Console.WriteLine("Introdueix l'edat del client: ");
+            int age, discount;
+           
+            Console.WriteLine(GetNameMsg);
+            name = Console.ReadLine() ?? "Antonio";
+
+            Console.WriteLine(GetAgeMsg);
             age = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Introdueix el descompte de l'entrada: ");
-            if (discount == 0)
+
+            do
             {
-                Console.WriteLine("No s'ha indicat cap descompte");
-            }
-            else if (discount < 0) {
-                Console.WriteLine("El descompte no pot ser negatiu");
-            }
-            PrintCompte(age, name);
+                Console.WriteLine(GetDiscountMsg);
+                discount = Convert.ToInt32(Console.ReadLine());
+                if (discount == Zero)
+                {
+                    Console.WriteLine(DiscountFalseMsg);
+                }
+                else if (discount < Zero)
+                {
+                    Console.WriteLine(DiscountErrorMsg);
+                }
+            } while (discount < Zero);
+
+            PrintTicket(age, name);
         }
 
-        static void PrintCompte(int age, string name)
+        public static void PrintTicket(int age, string name)
         {
-            PrintHeader();
-            Console.WriteLine("nom: " + age);
-            Console.WriteLine("edat: " + name);
-            if (EntradaGratis(age) == 1)
-            {
-                Console.WriteLine("El client té entrada gratis.");
-            }
-            else 
-            {
-                Console.WriteLine("El client no té entrada gratis.");
-            }    
+           const string NameMsg = "nom:",
+            AgeMsg = "edat:";
+           PrintHeader();
+           Console.WriteLine(NameMsg, name);
+           Console.WriteLine(AgeMsg, age);
+            Console.WriteLine(FreeEntry(age) ? "El client te entrada gratis." : "El client no te entrada gratis.");
         }
-        static void PrintHeader()
+        public static void PrintHeader()
         {
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*********** Control clients ***************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
+            Console.WriteLine("*******************************************"+
+                              "\n*******************************************"+
+                              "\n*********** Control clients ***************"+
+                              "\n*******************************************"+
+                              "\n*******************************************");
         }
-        static int EntradaGratis(int edat)
+        public static bool FreeEntry(int age)
         {
-            return (Jubilat(edat)) ? 1 : 0;
+            return (Pensioner(age));
         }
-        static bool Jubilat(int edat)
+        public static bool Pensioner(int age)
         {
-            return edat >= 65;
+            return age >= 65;
         }
     }
 }
