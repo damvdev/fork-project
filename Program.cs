@@ -13,9 +13,11 @@ namespace Projects
               DiscountFalseMsg = "No s'ha indicat cap descompte",
               DiscountErrorMsg = "El descompte no pot ser negatiu";
 
+            const int Zero=0;
+
             string name;
             int age, discount;
-
+           
             Console.WriteLine(GetNameMsg);
             name = Console.ReadLine() ?? "Antonio";
 
@@ -26,44 +28,43 @@ namespace Projects
             {
                 Console.WriteLine(GetDiscountMsg);
                 discount = Convert.ToInt32(Console.ReadLine());
-                if (discount == 0)
+                if (discount == Zero)
                 {
                     Console.WriteLine(DiscountFalseMsg);
                 }
-                else if (discount < 0)
+                else if (discount < Zero)
                 {
                     Console.WriteLine(DiscountErrorMsg);
                 }
-            } while (discount < 0);
+            } while (discount < Zero);
 
-            PrintCompte(age, name);
+            PrintTicket(age, name);
         }
 
-        static void PrintCompte(int age, string name)
+        public static void PrintTicket(int age, string name)
         {
-            const string NameMsg = "nom [0]",
-              AgeMsg = "edat: [0]";
-            PrintHeader();
-            Console.WriteLine(NameMsg, name);
-            Console.WriteLine(AgeMsg, age);
-            Console.WriteLine(EntradaGratis(age) ? "El client té entrada gratis." : "El client no té entrada gratis.");
-
+           const string NameMsg = "nom:",
+            AgeMsg = "edat:";
+           PrintHeader();
+           Console.WriteLine(NameMsg, name);
+           Console.WriteLine(AgeMsg, age);
+            Console.WriteLine(FreeEntry(age) ? "El client te entrada gratis." : "El client no te entrada gratis.");
         }
-        static void PrintHeader()
+        public static void PrintHeader()
         {
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*********** Control clients ***************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
+            Console.WriteLine("*******************************************"+
+                              "\n*******************************************"+
+                              "\n*********** Control clients ***************"+
+                              "\n*******************************************"+
+                              "\n*******************************************");
         }
-        static bool EntradaGratis(int edat)
+        public static bool FreeEntry(int age)
         {
-            return (Jubilat(edat));
+            return (Pensioner(age));
         }
-        static bool Jubilat(int edat)
+        public static bool Pensioner(int age)
         {
-            return edat >= 65;
+            return age >= 65;
         }
     }
 }
