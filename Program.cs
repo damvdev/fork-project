@@ -33,7 +33,7 @@ namespace Projects {
             PrintCompte(age, name);
         }
 
-        static void PrintCompte(int age, string name)
+        public static void PrintCompte(int age, string name)
         {
             const string freeMessage = "El client té entrada gratis.";
             const string notFreeMessage = "El client no té entrada gratis.";
@@ -41,9 +41,9 @@ namespace Projects {
             PrintHeader();
             Console.WriteLine("Nom: " + age);
             Console.WriteLine("Edat: " + name);
-            Console.WriteLine(EntradaGratis(age) == 1 ? freeMessage : notFreeMessage);
+            Console.WriteLine(Jubilat(age) ? freeMessage : notFreeMessage);
         }
-        static void PrintHeader()
+        public static void PrintHeader()
         {
             Console.WriteLine("*******************************************");
             Console.WriteLine("*******************************************");
@@ -51,11 +51,7 @@ namespace Projects {
             Console.WriteLine("*******************************************");
             Console.WriteLine("*******************************************");
         }
-        static int EntradaGratis(int edat)
-        {
-            return Jubilat(edat) ? 1 : 0;
-        }
-        static bool Jubilat(int edat)
+        public static bool Jubilat(int edat)
         {
             return edat >= 65;
         }
