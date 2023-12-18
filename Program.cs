@@ -5,8 +5,7 @@ namespace Projects
     {
         public static void Main()
         {
-            int age;
-            int discount;
+            int age, discount;
             string name;
             Console.WriteLine("Introdueix el nom del client: ");
             name = Console.ReadLine();
@@ -17,13 +16,13 @@ namespace Projects
             discount = Convert.ToInt32(Console.ReadLine());
             if (discount == 0) Console.WriteLine("No s'ha indicat cap descompte");
             else if (discount < 0) Console.WriteLine("El descompte no pot ser negatiu");
-            PrintCompte(age, name);
-        }
-        static void PrintCompte(int age, string name)
-        {
             PrintHeader();
             Console.WriteLine("Nom: " + name);
             Console.WriteLine("Edat: " + age);
+            PrintCompte(age, name);
+        }
+        static void PrintCompte(int age)
+        {
             if (Jubilat(age) == true) Console.WriteLine("El client té entrada gratis.");
             else Console.WriteLine("El client no té entrada gratis.");
         }
