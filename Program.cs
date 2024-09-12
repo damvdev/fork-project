@@ -1,59 +1,54 @@
-﻿using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿ using System;
 
 namespace Projects {
     public class MyProject
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            int age;
-            int num;
+            const string MsgInName = "Introdueix el nom del client: ";
+            const string MsgInAge = "Introdueix l'edat del client: ";
+            const string MsgInDiscount = "Introdueix el descompte de l'entrada: ";
+            const string MsgNoDiscount = "No s'ha indicat cap descompte";
+            const string MsgNegativeDiscount = "El descompte no pot ser negatiu";
+            int age,discount;
             string name;
-            Console.WriteLine("Introdueix el nom del client: ");
+
+            Console.WriteLine(MsgInName);
             name = Console.ReadLine();
-            Console.WriteLine("Introdueix l'edat del client: ");
-            age = Convert.ToInt32(Console.ReadLine());
-            
-            Console.WriteLine("Introdueix el descompte de l'entrada: ");
+            Console.WriteLine(MsgInAge);
+            age = Convert.ToInt32(Console.ReadLine());       
+            Console.WriteLine(MsgInDiscount);
+            discount = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
             if (discount == 0)
             {
-                Console.WriteLine("No s'ha indicat cap descompte");
+                Console.WriteLine(MsgNoDiscount);
             }
             else if (discount < 0) {
-                Console.WriteLine("El descompte no pot ser negatiu");
+                Console.WriteLine(MsgNegativeDiscount);
             }
-            PrintCompte(age, name);
+            PrintBill(age, name);
         }
 
-        static void PrintCompte(int age, string name)
+        public static void PrintBill(int age, string name)
         {
+            const string MsgName = "nom: ";
+            const string MsgAge = "edat: ";
+            const string MsgFreeEntrance = "El client té entrada gratis.";
+            const string MsgNoFreeEntrance = "El client no té entrada gratis.";
             PrintHeader();
-            Console.WriteLine("nom: " + age);
-            Console.WriteLine("edat: " + name);
-            if (EntradaGratis(age) == 1)
-            {
-                Console.WriteLine("El client té entrada gratis.");
-            }
-            else 
-            {
-                Console.WriteLine("El client no té entrada gratis.");
-            }    
+            Console.WriteLine(MsgName + name);
+            Console.WriteLine(MsgAge + age);
+            Console.WriteLine(Retired(age) ?  MsgFreeEntrance: MsgNoFreeEntrance);
         }
-        static void PrintHeader()
+        public static void PrintHeader()
         {
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*********** Control clients ***************");
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("*******************************************");
+            const string Header = "*******************************************\n*******************************************\n*********** Control clients ***************\n*******************************************\n*******************************************";
+            Console.WriteLine(Header);
         }
-        static int EntradaGratis(int edat)
+        public static bool Retired(int age)
         {
-            return (Jubilat(edat)) ? 1 : 0;
-        }
-        static bool Jubilat(int edat)
-        {
-            return edat >= 65;
+            return age >= 65;
         }
     }
 }
